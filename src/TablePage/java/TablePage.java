@@ -17,8 +17,8 @@ public class TablePage {
 
     private final By InputBox = By.id("task-table-filter");
 
-    private final By TableRows = By.xpath("//*[@id=\"task-table\"]/tbody/tr[@style=\"display: table-row;\"]");
-
+    private final By TableRows = By.xpath("//*[@id=\"task-table\"]/tbody/tr");
+//"//*[@id=\"task-table\"]/tbody/tr[@style=\"display: table-row;\"]"
     public void navigate() {
         driver.navigate().to(URL);
     }
@@ -31,13 +31,19 @@ public class TablePage {
         Thread.sleep(1000);
         List<WebElement> rows = driver.findElements(TableRows);
 
-        String[] result = new String[rows.size()];
-        int i = 0;
+        List<String> result = new ArrayList<String>();
+
         for (WebElement row : rows) {
-            String text = row.findElement(By.xpath("./td[2]")).getText();
-            result[i++] = text;
+            String value = row.getAttribute("style");
+            if(!value.equals("display: none;")){
+                String text = row.findElement(By.xpath("./td[2]")).getText();
+                result.add(text);
+            }
+
         }
-        return result;
+        String[] array = new String[result.size()];
+        array = result.toArray(array);
+        return array;
     }
 
 }

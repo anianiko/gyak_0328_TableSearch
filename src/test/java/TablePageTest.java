@@ -36,7 +36,7 @@ public class TablePageTest {
         tablePage.navigate();
         tablePage.giveInput(word);
         String[] actualResult = tablePage.getTasks();
-        String[] expectedResult = {"Wireframes", "Bootstrap 3", "Big fixing"};
+        String[] expectedResult = {"Wireframes", "Bootstrap 3", "Bug fixing"};
 
         Assertions.assertArrayEquals(expectedResult, actualResult);
 
